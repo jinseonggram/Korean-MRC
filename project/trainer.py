@@ -229,6 +229,7 @@ if __name__ == "__main__":
     # wandb
     wandb.init()
     wandb.run.name = parameters['NAME']
+    wandb.log({"train_loss": 0, "valid_loss": 0})
 
     # Train
     best_model, train_losses, dev_losses = train(parameters)
