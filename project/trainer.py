@@ -132,11 +132,11 @@ def train(parameters: dict):
                 # wandb
                 wandb.log({"train_loss": train_losses[-1], "valid_loss": dev_losses[-1]})
 
-        wandb.finish()
         print(f"Train Loss: {train_losses[-1]:.3f}")
         print(f"Valid Loss: {dev_losses[-1]:.3f}")
         print('- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -')
 
+    wandb.finish()
     return best_model, train_losses, dev_losses
 
 
@@ -212,7 +212,7 @@ if __name__ == "__main__":
     # Train Parameter
     parameters = {
         "datasets": ["train_added_aihub.json", "test.json"],                            # 학습용 데이터 경로
-        "epochs": 10,                # 전체 학습 Epoch
+        "epochs": 3,                # 전체 학습 Epoch
         'batch_size': {'train': 256,
                         'eval': 16,
                         'test': 256},         # Batch Size
