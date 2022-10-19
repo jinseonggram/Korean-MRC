@@ -57,10 +57,6 @@ def train(parameters: dict):
     # seed initialize
     seed_everything(parameters['seed'])
 
-    # wandb
-    wandb.init()
-    wandb.run.name = parameters['NAME']
-
     for epoch in range(epochs):
         print("Epoch", epoch, '===============================================================================================================')
 
@@ -215,7 +211,7 @@ if __name__ == "__main__":
 
     # Train Parameter
     parameters = {
-        "datasets": ["train.json", "test.json"],                            # 학습용 데이터 경로
+        "datasets": ["train_added_aihub.json", "test.json"],                            # 학습용 데이터 경로
         "epochs": 10,                # 전체 학습 Epoch
         'batch_size': {'train': 256,
                         'eval': 16,
@@ -229,6 +225,10 @@ if __name__ == "__main__":
     }
     parameters['NAME'] = f'kobigbird_ep{parameters["epochs"]}_max{parameters["max_length"]}_lr{parameters["learning_rate"]}_{random.randrange(0, 1024)}'
     parameters['save_path'] = f'./{parameters["NAME"]}'
+
+    # wandb
+    wandb.init()
+    wandb.run.name = parameters['NAME']
 
     # Train
     best_model, train_losses, dev_losses = train(parameters)
